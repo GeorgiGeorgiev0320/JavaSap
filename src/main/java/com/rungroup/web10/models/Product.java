@@ -26,6 +26,7 @@ public class Product {
     private Double price;
     private int quantity;
     private String ImageUrl;
+    private Long rating;
     @ManyToOne
     private Category category;
     @CreationTimestamp

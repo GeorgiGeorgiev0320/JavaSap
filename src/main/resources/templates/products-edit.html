@@ -1,0 +1,75 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Edit product</title>
+</head>
+<body>
+<section layout:fragment="body" class="py-5">
+    <div class="container">
+        <form role="form" method="post" th:action="@{/{productId}/edit(productId = ${product.id})}" th:object="${product}">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name">Product name</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            th:field="*{name}"
+                            placeholder="Maistor mani :D">
+                    <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="description">Description</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            th:field="*{description}"
+                            placeholder="Zdr kpr bebce...">
+                    <p th:if="${#fields.hasErrors('description')}" class="text-danger" th:errors="*{description}"></p>
+                </div>
+            </div>
+            <div class="form-group mb-6">
+                <label for="image">Image Url</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="image"
+                        name="image"
+                        th:field="*{ImageUrl}"
+                        placeholder="www.neshto_si.com">
+                <p th:if="${#fields.hasErrors('ImageUrl')}" class="text-danger" th:errors="*{ImageUrl}"></p>
+            </div>
+            <div class="form-group mb-6">
+                <label for="quantity">Quantity</label>
+                <input
+                        type="number"
+                        class="form-control"
+                        id="quantity"
+                        name="quantity"
+                        th:field="*{quantity}"
+                        placeholder="69 sesh se ahahah">
+                <p th:if="${#fields.hasErrors('quantity')}" class="text-danger" th:errors="*{quantity}"></p>
+            </div>
+            <div class="form-group mb-6">
+                <label for="price">Price</label>
+                <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        name="price"
+                        th:field="*{price}"
+                        placeholder="Mnogo para">
+                <p th:if="${#fields.hasErrors('price')}" class="text-danger" th:errors="*{price}"></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Product</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

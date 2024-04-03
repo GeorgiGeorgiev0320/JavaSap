@@ -31,6 +31,13 @@ public class ProductController {
         return "products-list";
     }
 
+    @GetMapping("/products/{productId}")
+    public String productDetail(@PathVariable("productId") long productId, Model model){
+           ProductDto productDto = productService.findProductById(productId);
+           model.addAttribute("product", productDto);
+           return "products-detail";
+    }
+
     @GetMapping("/add")
     public String createProduct(Model model){
         Product product = new Product();

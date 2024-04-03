@@ -2,7 +2,10 @@ package com.rungroup.web10.controllers;
 
 import com.rungroup.web10.dto.ProductDto;
 import com.rungroup.web10.models.Product;
+import com.rungroup.web10.models.UserEntity;
+import com.rungroup.web10.security.SecurityUtil;
 import com.rungroup.web10.services.ProductService;
+import com.rungroup.web10.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,22 +21,39 @@ import java.util.List;
 @Controller
 public class ProductController {
     private ProductService productService;
+    private UserService userService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, UserService userService) {
+
         this.productService = productService;
+        this.userService = userService;
     }
 
     @GetMapping("/products")
     public String listProducts(Model model){
+        UserEntity user = new UserEntity();
         List<ProductDto> products = productService.findAllProducts();
+        String username = SecurityUtil.getSessionUSer();
+        if (username != null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("products", products);
         return "products-list";
     }
 
     @GetMapping("/products/{productId}")
     public String productDetail(@PathVariable("productId") long productId, Model model){
+           UserEntity user = new UserEntity();
            ProductDto productDto = productService.findProductById(productId);
+           String username = SecurityUtil.getSessionUSer();
+           if (username != null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+           }
+           model.addAttribute("user", user);
            model.addAttribute("product", productDto);
            return "products-detail";
     }

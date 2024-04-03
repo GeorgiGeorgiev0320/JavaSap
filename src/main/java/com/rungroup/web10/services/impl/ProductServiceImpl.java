@@ -2,7 +2,10 @@ package com.rungroup.web10.services.impl;
 
 import com.rungroup.web10.dto.ProductDto;
 import com.rungroup.web10.models.Product;
+import com.rungroup.web10.models.UserEntity;
 import com.rungroup.web10.repository.ProductRepository;
+import com.rungroup.web10.repository.UserRepository;
+import com.rungroup.web10.security.SecurityUtil;
 import com.rungroup.web10.services.ProductService;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,13 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, UserRepository userRepository) {
+
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -29,7 +35,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(ProductDto productDto) {
+        String username = SecurityUtil.getSessionUSer();
+        UserEntity user = userRepository.findByUserName(username);
+
         Product product = mapToProduct(productDto);
+        product.setCreatedBy(user);
         return productRepository.save(product);
     }
 
@@ -41,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
                 .name(productDto.getName())
                 .ImageUrl(productDto.getImageUrl())
                 .price(productDto.getPrice())
+                .createdBy(productDto.getCreatedBy())
                 .createdOn(productDto.getCreatedOn())
                 .quantity(productDto.getQuantity())
                 .updatedOn(productDto.getUpdatedOn())
@@ -56,6 +67,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(ProductDto product) {
+
+        String username = SecurityUtil.getSessionUSer();
+        UserEntity user = userRepository.findByUserName(username);
+
         Product product1 = productRepository.findById(product.getId()).get();
         product1.setName(product.getName());
         product1.setUpdatedOn(LocalDateTime.now());
@@ -65,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
         product1.setImageUrl(product.getImageUrl());
         product1.setProductId(product1.getId());
 
-
+        product1.setCreatedBy(user);
         productRepository.save(product1);
     }
 
@@ -78,6 +93,7 @@ public class ProductServiceImpl implements ProductService {
                 .name(product.getName())
                 .ImageUrl(product.getImageUrl())
                 .price(product.getPrice())
+                .createdBy(product.getCreatedBy())
                 .createdOn(product.getCreatedOn())
                 .quantity(product.getQuantity())
                 .updatedOn(product.getUpdatedOn())

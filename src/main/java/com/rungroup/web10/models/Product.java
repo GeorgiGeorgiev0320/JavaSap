@@ -27,6 +27,10 @@ public class Product {
     private int quantity;
     private String ImageUrl;
     private Long rating;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false)
+    private UserEntity createdBy;
     @ManyToOne
     private Category category;
     @CreationTimestamp

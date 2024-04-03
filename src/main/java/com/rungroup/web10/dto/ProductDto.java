@@ -2,6 +2,7 @@ package com.rungroup.web10.dto;
 
 
 import com.rungroup.web10.models.Category;
+import com.rungroup.web10.models.UserEntity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,6 +31,7 @@ public class ProductDto {
     private int quantity;
     @NotEmpty(message = "ImageUrl cannot be empty!")
     private String ImageUrl;
+    private UserEntity createdBy;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

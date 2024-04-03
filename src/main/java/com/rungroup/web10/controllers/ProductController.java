@@ -76,7 +76,18 @@ public class ProductController {
 
     @GetMapping("/{productId}/edit")
     public String editProducts(@PathVariable("productId") long productId, Model model){
+        UserEntity user = new UserEntity();
         ProductDto product = productService.findProductById(productId);
+        String username = SecurityUtil.getSessionUSer();
+
+        if (username != null){
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        if (product.getCreatedBy() != user){
+            return "redirect:/products";
+        }
+        model.addAttribute("user", user);
         model.addAttribute("product",product);
         return "products-edit";
     }

@@ -25,7 +25,7 @@ public class ProductDto {
     private String name;
     @NotEmpty(message = "Description cannot be empty!")
     private String description;
-    @DecimalMax(value = "10.0", message = "Max price is 10") @DecimalMin(value = "1.0", message = "Min price is 1")
+    @DecimalMax(value = "99999", message = "Max price is 99999") @DecimalMin(value = "1.0", message = "Min price is 1")
     private Double price;
     @DecimalMax(value = "100.0", message = "Max quantity is 100") @DecimalMin(value = "1.0", message = "Min quantity is 1")
     private int quantity;

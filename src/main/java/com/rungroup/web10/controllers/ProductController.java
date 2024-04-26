@@ -103,10 +103,5 @@ public class ProductController {
         productService.updateProduct(product);
         return "redirect:/products";
     }
-
-    @GetMapping("/about")
-    public String aboutPage() {
-        return "about";
-    }
 }
 

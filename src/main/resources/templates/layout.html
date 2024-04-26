@@ -77,7 +77,7 @@
                 <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Find Us</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Contacts</a></li>
+                        <li><a class="dropdown-item" th:href="@{/contacts}">Contacts</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">Store Address</a></li>
                         <li><hr class="dropdown-divider" /></li>

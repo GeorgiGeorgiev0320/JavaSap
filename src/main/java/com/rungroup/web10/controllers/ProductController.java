@@ -58,6 +58,28 @@ public class ProductController {
         return "products-detail";
     }
 
+    @GetMapping("/delete/{productId}")
+    public String deleteProduct(@PathVariable("productId") Long productId,Model model) {
+        UserEntity user = new UserEntity();
+        ProductDto product = productService.findProductById(productId);
+        String username = SecurityUtil.getSessionUSer();
+        if (username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("product", product);
+        return "products-delete";
+    }
+    @PostMapping("/delete/{productId}")
+    public String deleteProduct(@PathVariable("productId") Long productId,
+                                     @Valid
+                                     @ModelAttribute("product") ProductDto product,
+                                     BindingResult result) {
+
+        productService.deleteProduct(product, productId);
+        return "redirect:/products";
+    }
     @GetMapping("/add")
     public String createProduct(Model model) {
         Product product = new Product();

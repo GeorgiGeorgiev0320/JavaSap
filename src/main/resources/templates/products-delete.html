@@ -1,8 +1,8 @@
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:sec="http://www.thymeleaf.org"
-        layout:decorate="~{layout}">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
 <head>
     <title>Details</title>
 </head>
@@ -83,18 +83,11 @@
     </div>
 
     <div class="button-section text-center">
-        <a class="btn btn-outline-dark mt-auto" th:href="@{/products/{productId}(productId = ${product.id})}">Details</a>
-        <div sec:authorize="isAuthenticated()" class="text-center">
-            <a class="btn btn-outline-dark mt-auto" th:href="@{addToCart/{productId}(productId = ${product.id})}">Add to cart</a>
-        </div>
         <div th:if="${user.id} == ${product.createdBy.id}">
             <div sec:authorize="isAuthenticated()" class="text-center">
-                <a class="btn btn-outline-dark mt-auto" th:href="@{/{productId}/edit(productId = ${product.id})}">Edit</a>
-            </div>
-        </div>
-        <div th:if="${user.id} == ${product.createdBy.id}">
-            <div sec:authorize="isAuthenticated()" class="text-center">
-                <a class="btn btn-danger mt-auto" th:href="@{/delete/{productId}(productId = ${product.id})}">Delete</a>
+                <form th:action="@{/delete/{productId}(productId = ${product.id})}" method="post">
+                    <button class="btn btn-danger mt-auto" type="submit">Delete</button>
+                </form>
             </div>
         </div>
     </div>

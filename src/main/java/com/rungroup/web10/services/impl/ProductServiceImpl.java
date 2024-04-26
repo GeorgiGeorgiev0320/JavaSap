@@ -39,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
         UserEntity user = userRepository.findByUserName(username);
 
         Product product = mapToProduct(productDto);
+        product.setActive(true);
         product.setCreatedBy(user);
         return productRepository.save(product);
     }
@@ -63,6 +64,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto findProductById(long productId) {
         Product product = productRepository.findById(productId).get();
         return mapToProductDto(product);
+    }
+
+    @Override
+    public void deleteProduct(ProductDto productDto, Long id) {
+        Product product1 = productRepository.findById(id).get();
+        productRepository.delete(product1);
     }
 
     @Override

@@ -1,100 +1,95 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sec="http://www.thymeleaf.org"
         layout:decorate="~{layout}">
 <head>
     <title>Details</title>
 </head>
 <body class="d-flex flex-column">
 <section layout:fragment="body">
-    <header class="py-5 bg-light border-bottom mb-4">
-        <div class="container">
-            <div class="text-center my-5">
-                <h1 class="fw-bolder" th:text="${product.name}"></h1>
-                <p class="lead mb-0">Charlotte, NC</p>
+    <style>
+        .product-details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .details {
+            margin-top: 20px;
+        }
+
+        .detail {
+            margin-bottom: 10px;
+        }
+
+        .detail strong {
+            display: inline-block;
+            width: 120px;
+        }
+
+        .product-image {
+            max-width: 300px;
+            height: auto;
+        }
+
+        .no-product {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .button-section {
+            margin-top: 20px;
+        }
+
+        .button-section .btn {
+            margin-right: 10px;
+        }
+    </style>
+
+    <div th:if="${product != null}" class="product-details">
+        <h1 class="text-center">Product Details</h1>
+        <div class="details">
+            <div class="detail">
+                <strong>Product ID:</strong>
+                <span th:text="${product.id}"></span>
+            </div>
+            <div class="detail">
+                <strong>Name:</strong>
+                <span th:text="${product.name}"></span>
+            </div>
+            <div class="detail">
+                <strong>Description:</strong>
+                <span th:text="${product.description}"></span>
+            </div>
+            <div class="detail">
+                <strong>Quantity:</strong>
+                <span th:text="${product.quantity}"></span>
+            </div>
+            <div class="detail">
+                <strong>Image:</strong>
+                <img class="product-image" th:src="${product.imageUrl}" alt="Product Image" />
             </div>
         </div>
-    </header>
-    <!-- Page content-->
-    <div class="container">
-        <div class="row">
-            <!-- Blog entries-->
-            <div class="col-lg-8">
-                <!-- Featured blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" th:src="${product.imageUrl}" alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted" th:text="${product.createdOn}"></div>
-                        <h2 class="card-title">About this product</h2>
-                        <p class="card-text" th:text="${club.content}"></p>
-                        <div th:if="${user.id} == ${club.createdBy.id}">
-                            <a class="btn btn-primary" th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}">Delete</a>
-                            <a class="btn btn-primary" th:href="@{/events/{clubId}/new(clubId=${club.id})}">Create Event</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Nested row for non-featured blog posts-->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div th:each="product :${products}" class="card mb-4">
-                            <a href="#!"><img class="card-img-top" th:src="${product.imageUrl}" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2022</div>
-                                <h2 th:text="${product.name}"class="card-title h4"></h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" th:href="@{/events/{eventId}(eventId=${event.id})}">More</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                    </div>
-                </div>
-                <!-- Pagination-->
-                <nav aria-label="Pagination">
-                    <hr class="my-0" />
-                    <ul class="pagination justify-content-center my-4">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <!-- Side widgets-->
-            <div class="col-lg-4">
-                <!-- Search widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Road Runner</a></li>
-                                    <li><a href="#!">Trail</a></li>
-                                    <li><a href="#!">Marathon</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Side widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Side Widget</div>
-                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-                </div>
+    </div>
+
+    <div th:if="${product == null}" class="no-product">
+        <p>No product found.</p>
+    </div>
+
+    <div class="button-section text-center">
+        <a class="btn btn-outline-dark mt-auto" th:href="@{/products/{productId}(productId = ${product.id})}">Details</a>
+        <div sec:authorize="isAuthenticated()" class="text-center">
+            <a class="btn btn-outline-dark mt-auto" th:href="@{addToCart/{productId}(productId = ${product.id})}">Add to cart</a>
+        </div>
+        <div th:if="${user.id} == ${product.createdBy.id}">
+            <div sec:authorize="isAuthenticated()" class="text-center">
+                <a class="btn btn-outline-dark mt-auto" th:href="@{/{productId}/edit(productId = ${product.id})}">Edit</a>
             </div>
         </div>
     </div>

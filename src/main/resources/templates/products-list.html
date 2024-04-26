@@ -1,6 +1,7 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sec="http://www.thymeleaf.org"
         layout:decorate="~{layout}">
 <body>
 <!-- Section-->
@@ -58,9 +59,10 @@
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{/products/{productId}(productId = ${product.id})}">Details</a></div>
+                        <div sec:authorize="isAuthenticated()" class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{addToCart/{productId}(productId = ${product.id})}">Add to cart</a></div>
                         <div th:if="${user.id} == ${product.createdBy.id}">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{/{productId}/edit(productId = ${product.id})}">Edit</a></div>
+                        <div sec:authorize="isAuthenticated()" class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{/{productId}/edit(productId = ${product.id})}">Edit</a></div>
                      </div>
                     </div>
                 </div>

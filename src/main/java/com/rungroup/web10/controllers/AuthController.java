@@ -94,9 +94,9 @@ public class AuthController {
         HttpEntity<MultiValueMap<String, String >> request = new HttpEntity<>(map, headers);
         ReCaptchaResponce response =  restTemplate.postForObject(recaptchaUrl,request, ReCaptchaResponce.class );
 
-        System.out.println("Success" + response.isSuccess());
-        System.out.println("Hostname" + response.getHostname());
-        System.out.println("Challenge Timestamp" + response.getChallenge_ts());
+        System.out.println("Success " + response.isSuccess());
+        System.out.println("Hostname " + response.getHostname());
+        System.out.println("Challenge Timestamp " + response.getChallenge_ts());
 
         return response.isSuccess();
     }

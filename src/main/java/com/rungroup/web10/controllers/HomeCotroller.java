@@ -10,4 +10,14 @@ public class HomeCotroller {
     public String home() {
         return "redirect:/products";
     }
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about";
+    }
+
+    @GetMapping("/contacts")
+    public String contacts() {
+        return "contacts";
+    }
 }

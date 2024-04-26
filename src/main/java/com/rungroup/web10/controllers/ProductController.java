@@ -31,11 +31,11 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String listProducts(Model model){
+    public String listProducts(Model model) {
         UserEntity user = new UserEntity();
         List<ProductDto> products = productService.findAllProducts();
         String username = SecurityUtil.getSessionUSer();
-        if (username != null){
+        if (username != null) {
             user = userService.findByUsername(username);
             model.addAttribute("user", user);
         }
@@ -45,29 +45,29 @@ public class ProductController {
     }
 
     @GetMapping("/products/{productId}")
-    public String productDetail(@PathVariable("productId") long productId, Model model){
-           UserEntity user = new UserEntity();
-           ProductDto productDto = productService.findProductById(productId);
-           String username = SecurityUtil.getSessionUSer();
-           if (username != null){
+    public String productDetail(@PathVariable("productId") long productId, Model model) {
+        UserEntity user = new UserEntity();
+        ProductDto productDto = productService.findProductById(productId);
+        String username = SecurityUtil.getSessionUSer();
+        if (username != null) {
             user = userService.findByUsername(username);
             model.addAttribute("user", user);
-           }
-           model.addAttribute("user", user);
-           model.addAttribute("product", productDto);
-           return "products-detail";
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("product", productDto);
+        return "products-detail";
     }
 
     @GetMapping("/add")
-    public String createProduct(Model model){
+    public String createProduct(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
         return "products-add";
     }
 
     @PostMapping("/add")
-    public String saveProduct(@Valid @ModelAttribute("product")ProductDto productDto, BindingResult result){
-        if (result.hasErrors()){
+    public String saveProduct(@Valid @ModelAttribute("product") ProductDto productDto, BindingResult result) {
+        if (result.hasErrors()) {
             return "products-add";
         }
         productService.saveProduct(productDto);
@@ -75,20 +75,20 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}/edit")
-    public String editProducts(@PathVariable("productId") long productId, Model model){
+    public String editProducts(@PathVariable("productId") long productId, Model model) {
         UserEntity user = new UserEntity();
         ProductDto product = productService.findProductById(productId);
         String username = SecurityUtil.getSessionUSer();
 
-        if (username != null){
+        if (username != null) {
             user = userService.findByUsername(username);
             model.addAttribute("user", user);
         }
-        if (product.getCreatedBy() != user){
+        if (product.getCreatedBy() != user) {
             return "redirect:/products";
         }
         model.addAttribute("user", user);
-        model.addAttribute("product",product);
+        model.addAttribute("product", product);
         return "products-edit";
     }
 
@@ -96,8 +96,8 @@ public class ProductController {
     public String saveEditedProducts(@PathVariable("productId") long productId,
                                      @Valid
                                      @ModelAttribute("product") ProductDto product,
-                                     BindingResult result){
-        if (result.hasErrors()){
+                                     BindingResult result) {
+        if (result.hasErrors()) {
             return "products-edit";
         }
         productService.updateProduct(product);
@@ -105,10 +105,8 @@ public class ProductController {
     }
 
     @GetMapping("/about")
-    public String aboutPage(){
+    public String aboutPage() {
         return "about";
     }
-
 }
-
 

@@ -6,6 +6,7 @@
   <title>Register</title>
 </head>
 <section layout:fragment="body">
+  <script src="https://www.google.com/recaptcha/api.js" async defer ></script>
   <style>
     .main {
       padding: 0px 10px;
@@ -41,7 +42,7 @@
       <div th:if="${param.logout}" class="alert alert-success">
         You have been logged out.</div>
       <div class="login-form">
-        <form method="post" th:action="@{/login}">
+        <form method="post" th:action="@{/login}" onsubmit="return validateForm()">
           <div class="form-group">
             <label>Username</label>
             <input
@@ -60,11 +61,23 @@
                     placeholder="Password"
                     name="password">
           </div>
-          <button th:href="@{/register}" type="submit" class="btn btn-black">Don't have an account?Register here.</button>
+          <button th:href="@{/register.html}" type="submit" class="btn btn-black">Don't have an account?Register here.</button>
+
+          <div class="g-recaptcha" th:data-sitekey="${@environment.getProperty('recaptcha.key')}"></div>
           <button type="submit" value="Log in" class="btn btn-secondary">Login</button>
         </form>
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+    function validateForm(){
+      if (grecaptcha.getResponse()){
+        return true;
+      }else{
+        alert("Error! Prove you are not a robot!");
+        return false;
+      }
+    }
+  </script>
 </section>
 </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .error-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .error-message {
+            font-size: 24px;
+            color: #ff5733; /* bright orange */
+            margin-bottom: 20px;
+        }
+        .error-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .error-suggestion {
+            font-size: 18px;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="body" class="py-5">
+    <div class="error-container">
+        <img src="https://static1.howtogeekimages.com/wordpress/wp-content/uploads/2022/05/frowning-BSOD-Header.png" alt="Error" class="error-image">
+        <div class="error-message">Oops! Something went wrong.</div>
+        <div class="error-suggestion">Don't worry, our team is on it. Please try again later.</div>
+        <div class="text-center mt-4">
+            <a href="/products" class="btn btn-primary">Go Back</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

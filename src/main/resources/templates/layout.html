@@ -16,6 +16,21 @@
     <link href="/css/styles.css" rel="stylesheet" />
 
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Everything shop</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+    </style>
 </head>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -82,15 +97,14 @@
 </nav>
 <body layout:fragment="body"></body>
 <!-- Footer-->
-<footer class="py-5 bg-dark" >
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; 2024</p></div>
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; 2024</p>
+    </div>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="/js/scripts.js"></script>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 0c286376bfa15b62ea6c1f81eccf1b1faa37de3a
+

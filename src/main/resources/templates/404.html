@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+  <title>404 Error</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .error-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .error-message {
+      font-size: 6em;
+      margin-bottom: 20px;
+      color: #dc3545;
+    }
+
+    .error-text {
+      font-size: 1.5em;
+      color: #6c757d;
+    }
+
+    .error-image {
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<section layout:fragment="body" class="error-container">
+  <div>
+    <img src="https://i.pinimg.com/originals/0e/c0/db/0ec0dbf1e9a008acb9955d3246970e15.gif" alt="Error" class="error-image">
+    <div class="error-text">Oops! The page you're looking for cannot be found.</div>
+    <div class="text-center mt-4">
+      <a href="/products" class="btn btn-primary">Go Back</a>
+    </div>
+  </div>
+</section>
+</body>
+</html>
